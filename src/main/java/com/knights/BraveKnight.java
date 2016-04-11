@@ -8,12 +8,17 @@ package com.knights;
  */
 public class BraveKnight implements Knight{
     private Quest quest;
+    //private Minstrel minstrel;  //呤游诗人
 
-    public BraveKnight(Quest quest) {
+    public BraveKnight(Quest quest/*, Minstrel minstrel*/) {
         this.quest = quest;
+        //this.minstrel = minstrel;
     }
 
+
     public void embarkOnQuest() throws QuestException {
+        //minstrel.singBeforeQuest(); //Knight应该管理它的Minstrel吗？
         quest.embark();
+        //minstrel.singAfterQuest();
     }
 }
