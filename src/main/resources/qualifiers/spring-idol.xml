@@ -8,8 +8,12 @@
         <constructor-arg value="15"/>
         <constructor-arg ref="sonnet29"/>
     </bean>
-
+    <!--上面的装配执行的逻辑本质与下面的Java代码相同
+    Poem sonnet29 = new Sonnet29();
+    Performer duck = new PoeticJuggler(15,sonnet29);
+    -->
     <bean id="sonnet29" class="com.spring.qualifiers.Sonnet29"/>
 
-
+    <!--通过工厂方法创建Bean-->
+    <bean id="theStage" class="com.spring.qualifiers.Stage" factory-method="getInstance"/>
 </beans>
