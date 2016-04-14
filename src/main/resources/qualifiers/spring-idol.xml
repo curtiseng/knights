@@ -16,4 +16,29 @@
 
     <!--通过工厂方法创建Bean-->
     <bean id="theStage" class="com.spring.qualifiers.Stage" factory-method="getInstance"/>
+
+    <!--注入Bean属性-->
+    <bean id="kenny" class="com.spring.qualifiers.Instrumentalist">
+        <!--property元素会指示Spring调用setSong()方法设置song属性-->
+        <property name="song" value="Jingle Bells"/>
+        <property name="instrument" ref="saxophone"/>
+    </bean>
+
+    <bean id="saxophone" class="com.spring.qualifiers.Saxophone"/>
+
+    <!--装配list，Set，Array-->
+    <bean id="hank" class="com.spring.qualifiers.OneManBand">
+        <property name="instruments">
+            <list>
+                <ref bean="guitar" />
+                <ref bean="cymbal" />
+                <ref bean="harmonica" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="guitar" class="com.spring.qualifiers.instruments.Guitar"/>
+    <bean id="cymbal" class="com.spring.qualifiers.instruments.Cymbal"/>
+    <bean id="harmonica" class="com.spring.qualifiers.instruments.Harmonica"/>
+
 </beans>
