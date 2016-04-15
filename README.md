@@ -162,5 +162,5 @@
     |custom      |使用自定义的org.springframework.core.type.TypeFilter实现类，该类由expression属性指定
     |regex       |过滤器扫描类的名称与expression属性所指定的正则表达式所匹配的那些类
   
-3.使用Spring基于Java的配置：暂留。
+3.使用Spring基于Java的配置：暂留 。
 
