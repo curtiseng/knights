@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+    <!--使用另一个配置文件里的 kenny Bean-->
+    <!--<bean id="eddie"
+          class="com.spring.qualifiers.Instrumentalist">
+        <property name="instrument">
+            <bean class="com.spring.qualifiers.instruments.Guitar" />
+        </property>
+    </bean>-->
+
+    <bean id="audience" class="com.spring.aop.Audience"/>
+
+    <aop:config>
+        <aop:aspect ref="audience">
+            <!--可以将Performer接口替换为具体实现类，限制是哪个Bean的perform()被通知-->
+            <aop:before pointcut="execution(* com.spring.qualifiers.Performer.perform(..))" method="takeSeats"/>
+            <aop:before pointcut="execution(* com.spring.qualifiers.Performer.perform(..))" method="turnOffCellPhones"/>
+            <aop:after-returning pointcut="execution(* com.spring.qualifiers.Performer.perform(..))" method="applaud"/>
+            <aop:after-throwing pointcut="execution(* com.spring.qualifiers.Performer.perform(..))" method="demandRefund"/>
+
+        </aop:aspect>
+    </aop:config>
+
+    <!--环绕通知替换上面的4个通知，还可以计算程序执行时间，不需要另外的成员变量保存状态-->
+    <aop:config>
+        <aop:aspect ref="audience">
+
+            <aop:pointcut id="performance" expression="execution(* com.spring.qualifiers.Performer.perform(..))"/>
+
+            <aop:around pointcut-ref="performance" method="watchPerformance"/>
+
+        </aop:aspect>
+    </aop:config>
+</beans>
