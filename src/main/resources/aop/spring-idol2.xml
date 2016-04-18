@@ -18,11 +18,20 @@
     <aop:config>
         <aop:aspect ref="audience">
             <!--可以将Performer接口替换为具体实现类，限制是哪个Bean的perform()被通知-->
+            <!--Spring的Bean()指示器可以在切点表达式中使用Bean的ID来表示Bean-->
             <aop:before pointcut="execution(* com.spring.qualifiers.Performer.perform(..))" method="takeSeats"/>
             <aop:before pointcut="execution(* com.spring.qualifiers.Performer.perform(..))" method="turnOffCellPhones"/>
             <aop:after-returning pointcut="execution(* com.spring.qualifiers.Performer.perform(..))" method="applaud"/>
             <aop:after-throwing pointcut="execution(* com.spring.qualifiers.Performer.perform(..))" method="demandRefund"/>
 
+        </aop:aspect>
+        <!--通过切面引入新功能-->
+        <aop:aspect>
+            <aop:declare-parents types-matching="com.spring.qualifiers.Performer+"
+                                 implement-interface="com.spring.aop.Contestant"
+                                 default-impl="com.spring.aop.GraciousContestant"/>
+            <!--default-impl="com.spring.aop.GraciousContestant"可以替换为delegate-ref="GraciousContestant"
+            但GraciousContestant先得声明为一个Bean-->
         </aop:aspect>
     </aop:config>
 
@@ -36,4 +45,18 @@
 
         </aop:aspect>
     </aop:config>
+
+    <!--为通知传递参数，魔术师如何截听志愿者的内心感应-->
+    <bean id="magician" class="com.spring.aop.Magician"/>
+    <bean id="volunteer" class="com.spring.aop.Volunteer"/>
+
+    <aop:config>
+        <aop:aspect ref="magician">
+            <aop:pointcut id="thinking" expression="execution(* com.spring.aop.Thinker.thinkOfSomething(String)) and args(thoughts)"/>
+
+            <aop:before method="interceptThoughts" arg-names="thoughts" pointcut-ref="thinking"/>
+        </aop:aspect>
+    </aop:config>
+
+
 </beans>

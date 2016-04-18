@@ -166,7 +166,24 @@
 
 ### 第四章 面向切面的Spring
 
-##### 
+##### AOP术语：通知（Advice），连接点（JoinPoint），切点（Poincut），切面（Aspect），引入（Introduction），织入（Weaving）
+
+##### Spring对AOP的支持
+三种AOP框架：AspectJ，JBoss AOP，Spring AOP。
+
+Spring提供了4种各具特色的AOP支持：
+1.基于代理的经典AOP
+2. @AspectJ注解驱动的切面
+3.纯POJO切面
+4.注入式AspectJ切面（适用Spring各版本）
+
+前三种只支持方法拦截，想要使用构造器、属性拦截等超出了方法拦截的AOP，需要考虑在AspectJ里实现切面。
+
+Spring通知是用Java编写的，Spring在运行期通知对象，Spring只支持方法连接点。
+
+##### 编写切点与在XML中声明切面：详见aop/spring-idol2.xml
+
+
 
 
   
