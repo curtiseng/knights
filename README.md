@@ -13,19 +13,19 @@
 ##### 一、声明Bean： 
             <bean id="id" class="com.thomas.class"/>
 ##### 二、通过构造器注入：
-            <bean id="id" class="com.thomas.calss">
+            <bean id="id" class="com.thomas.class">
                 <constructor-arg value="value" />
             </bean>`
 ##### 三、通过构造器引用对象
-            <bean id="id" class="com.thomas.calss">
+            <bean id="id" class="com.thomas.class">
                 <constructor-arg value="value" />
                 <constructor-arg ref="id1" />
              </bean>
              <bean id="id1" class="com.thomas.class1"/>
 ##### 四、通过工厂方法创建Bean
-            <bean id="id" class="com.thomas.calss" factory-method="method" />
+            <bean id="id" class="com.thomas.class" factory-method="method" />
 ##### 五、Bean的作用域：所有Spring Bean默认都是单例。如果需要每次请求时都获得唯一的Bean实例时，配置Bean的scope属性设为prototype.
-          |helloe        |定义                                                                                  
+          |hello        |定义                                                                                  
           |----------    |-----------------------------------------------------------------------------------
           |singleton     |在每一个Spring容器中，一个Bean定义只有一个对象实例                                      
           |prototype     |允许Bean的定义可以被实例化任意次（每次调用都创建一个实例）                               
@@ -41,7 +41,7 @@
 ##### 七、注入Bean属性：<property>在许多方面都与<constructor-arg>类似，只不过一个通过构造参数来注入值，一个是通过调用属性的setter方法来注入值
 +注入简单值：value可以是任意值，spring会自动判断并转换值类型
 
-        <bean id="id" class = "com.thomas.calss">   
+        <bean id="id" class = "com.thomas.class">   
             <property name="name" value="value"/>
         </bean>
         
@@ -55,7 +55,7 @@
 +注入内部Bean（内部Bean仅适用于一次注入，而且不能被其他Bean所引用，所以没必要配置一个ID）
         
         //setter注入内部Bean
-        <bean id="id" class = "com.thomas.calss">
+        <bean id="id" class = "com.thomas.class">
             <property name="name" value="value" />
             <property name="name">
                 <bean class = "com.thomas.class1" />
@@ -134,7 +134,7 @@
 4.类似@Qualifier的@Named（两两一组）
 5.在注解中使用表达式@Value
 
-##### 自动检测Bean：使用<context:component-scan>元素代替<context:annitation-config>
+##### 自动检测Bean：使用<context:component-scan>元素代替<context:annotation-config>
 
     //扫描com.thomas包及其子包里能够注册为SpringBean的类
     <context:component:scan
@@ -166,7 +166,7 @@
 
 ### 第四章 面向切面的Spring
 
-##### AOP术语：通知（Advice），连接点（JoinPoint），切点（Poincut），切面（Aspect），引入（Introduction），织入（Weaving）
+##### AOP术语：通知（Advice），连接点（JoinPoint），切点（Pointcut），切面（Aspect），引入（Introduction），织入（Weaving）
 
 ##### Spring对AOP的支持
 三种AOP框架：AspectJ，JBoss AOP，Spring AOP。
